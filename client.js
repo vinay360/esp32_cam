@@ -1,5 +1,9 @@
-const WS_URI = 'ws://192.168.74.115:81';
+const WS_URI = 'ws://ec2-43-204-229-175.ap-south-1.compute.amazonaws.com:8081';
 const ws = new WebSocket(WS_URI);
+
+function blink() {
+  ws.send('blink');
+}
 
 ws.addEventListener('open', (event) => {
   ws.send(
