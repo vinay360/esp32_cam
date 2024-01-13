@@ -20,7 +20,7 @@ const clientWss = new WebSocket.Server({ port: WS_PORT, host: HOST }, () =>
   ws.on('message', (data) => {
     if (ws.readyState !== ws.OPEN) return;
     console.log(data);
-    cam.send(data);
+    if (cam) cam.send(data);
   });
   connectedClients.push(ws);
 });
