@@ -19,7 +19,6 @@ const clientWss = new WebSocket.Server({ port: WS_PORT, host: HOST }, () =>
   console.log('Client connected');
   ws.on('message', (data) => {
     if (ws.readyState !== ws.OPEN) return;
-    console.log(data);
     if (cam) cam.send(data);
   });
   connectedClients.push(ws);
@@ -29,15 +28,12 @@ const camWss = new WebSocket.Server({ port: CAM_PORT, host: HOST }, () => {
   console.log(`CAM Server running on port ${CAM_PORT}`);
 })
   .on('connection', (ws) => {
+    console.log('CAM connected');
     cam = ws;
     ws.on('error', (err) => {
       console.log('err', err);
     });
-    ws.on('open', (event) => {
-      console.log('CAM connected');
-    });
     ws.on('message', (data) => {
-      console.log(data.toString());
       if (ws.readyState !== ws.OPEN) return;
       image = Buffer.from(Uint8Array.from(data)).toString('base64');
       connectedClients.forEach((client) => {
