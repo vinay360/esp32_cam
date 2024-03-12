@@ -1,4 +1,4 @@
-const WS_URI = 'ws://10.50.10.158:8081';
+const WS_URI = 'ws://43.205.240.23:8081';
 const ws = new WebSocket(WS_URI);
 
 function blink() {

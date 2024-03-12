@@ -25,7 +25,7 @@
 
 const char* ssid = "NSUT-Campus";
 const char* password = NULL;
-const char* websocket_server_host = "10.50.10.158";
+const char* websocket_server_host = "43.205.240.23";
 const uint16_t websocket_server_port = 8000;
 
 using namespace websockets;
