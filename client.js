@@ -1,4 +1,4 @@
-const WS_URI = 'ws://ec2-43-204-229-175.ap-south-1.compute.amazonaws.com:8081';
+const WS_URI = 'ws://10.50.10.158:8081';
 const ws = new WebSocket(WS_URI);
 
 function blink() {
@@ -6,13 +6,13 @@ function blink() {
 }
 
 ws.addEventListener('open', (event) => {
-  ws.send(
-    JSON.stringify({
-      client: '81',
-      operation: 'connecting',
-      data: {},
-    })
-  );
+  // ws.send(
+  //   JSON.stringify({
+  //     client: '81',
+  //     operation: 'connecting',
+  //     data: {},
+  //   })
+  // );
 });
 
 ws.onmessage = (message) => {
@@ -20,3 +20,12 @@ ws.onmessage = (message) => {
   console.log(md);
   document.querySelector('#image').src = 'data:image/jpeg;base64,' + md.image;
 };
+
+function send(msg) {
+  console.log(msg);
+  if(ws.readyState !== ws.OPEN) {
+    console.log("chutiye connect to kr");
+    return;
+  }
+  ws.send(msg);
+}

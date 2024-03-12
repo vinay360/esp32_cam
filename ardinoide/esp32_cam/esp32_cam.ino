@@ -25,11 +25,58 @@
 
 const char* ssid = "NSUT-Campus";
 const char* password = NULL;
-const char* websocket_server_host = "ec2-13-235-77-176.ap-south-1.compute.amazonaws.com";
+const char* websocket_server_host = "10.50.10.158";
 const uint16_t websocket_server_port = 8000;
 
 using namespace websockets;
 WebsocketsClient client;
+
+// controll
+
+const int motor1 = 12;
+const int motor2 = 13;
+
+const int motor4 = 15;
+const int motor3 = 14;
+void forward(){
+  digitalWrite(motor1, HIGH);
+  digitalWrite(motor2, LOW);
+  digitalWrite(motor3, LOW);
+  digitalWrite(motor4, HIGH);
+}
+
+void right(){
+  digitalWrite(motor1, LOW);
+  digitalWrite(motor2, HIGH);
+  digitalWrite(motor3, LOW);
+  digitalWrite(motor4, HIGH);
+
+}
+
+void left(){
+  digitalWrite(motor1, HIGH);
+  digitalWrite(motor2, LOW);
+  digitalWrite(motor3, HIGH);
+  digitalWrite(motor4, LOW);
+}
+
+void back(){
+  digitalWrite(motor1, LOW);
+  digitalWrite(motor2, HIGH);
+  digitalWrite(motor3, HIGH);
+  digitalWrite(motor4, LOW);
+}
+
+void stop() {
+  digitalWrite(motor1, LOW);
+  digitalWrite(motor2, LOW);
+  digitalWrite(motor3, LOW);
+  digitalWrite(motor4, LOW);
+}
+
+// end for controller
+
+
 
 void onEventsCallback(WebsocketsEvent event, String data) {
     if(event == WebsocketsEvent::ConnectionOpened) {
@@ -46,10 +93,37 @@ void onEventsCallback(WebsocketsEvent event, String data) {
 
 void onMessageCallback(WebsocketsMessage message) {
     String data = message.data();
+    if(data == "f") {
+      forward();
+      Serial.print("forward");   
+    }
+    else if(data == "b") {
+      back();
+      Serial.print("backward");   
+    }
+    else if(data == "l"){
+      left();
+      Serial.print("left");   
+    }
+    else if(data == "r"){
+      right();
+      Serial.print("right");   
+    }
+    else if(data == "x") {
+      stop();
+      Serial.print("stop");
+    }
     Serial.print(data);
 }
 
 void setup() {
+// controller pin
+  pinMode(motor1, OUTPUT);
+  pinMode(motor2, OUTPUT);
+  pinMode(motor3, OUTPUT);
+  pinMode(motor4, OUTPUT);
+// end
+
   WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
 
   Serial.begin(115200);
@@ -79,7 +153,7 @@ void setup() {
   config.pixel_format = PIXFORMAT_JPEG; // for streaming
   //config.pixel_format = PIXFORMAT_RGB565; // for face detection/recognition
 
-  config.frame_size = FRAMESIZE_VGA;
+  config.frame_size = FRAMESIZE_HQVGA;
   // config.grab_mode = CAMERA_GRAB_WHEN_EMPTY;
   // config.fb_location = CAMERA_FB_IN_PSRAM;
   config.jpeg_quality = 15;
@@ -131,6 +205,6 @@ void loop() {
     }
     client.sendBinary((const char*) fb->buf, fb->len);
     esp_camera_fb_return(fb);
-    // client.poll();
+    client.poll();
   }
 }

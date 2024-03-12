@@ -3,24 +3,111 @@
     <script src="client.js"></script>
   </head>
   <body>
+    
+  
     <style>
       body {
-        background-color: #000;
+        
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        background-color: rgb(0, 0, 0);
+        gap: 10px;
       }
-
-      #myButton {
-        display: block;
-        margin: 0 auto;
-        background-color: #ff0000;
-        color: #fff;
-        padding: 10px 20px;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        font-size: 24px;
+  
+      .controller {
+        position: relative;
+        grid-column: 3;
+        grid-row: 2;
+        
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        text-align: center;
+        
+        width: 600px; 
+        height: 350px; 
+      
+        /* border: 1px solid #07e690;  */
+      }
+  
+  
+      #forward {
+        
+        grid-column: 2;
+        grid-row: 1;
+        background-color: #20c8d4;
+        color :rgb(0, 0, 0);
+        font-size: 20px;
+        cursor: pointer;
+        border-radius: 60px;
+      }
+  
+      #left {
+        
+        grid-column: 1;
+        grid-row: 2;
+        background-color: #20c8d4;
+        color :rgb(0, 0, 0);
+        font-size: 20px;
+        cursor: pointer;
+        border-radius: 60px;
+      }
+  
+      #back {
+        
+        grid-column: 2;
+        grid-row: 3;
+        background-color: #20c8d4;
+        color :rgb(0, 0, 0);
+        font-size: 20px;
+        cursor: pointer;
+        border-radius: 60px;
+      }
+  
+      #right {
+        
+        grid-column: 3;
+        grid-row: 2;
+        background-color: #20c8d4;
+        color :rgb(0, 0, 0);
+        font-size: 20px;
+        cursor: pointer;
+        border-radius: 60px;
+      }
+      .video{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        width: 600px; 
+        height: 350px;   
+        grid-column: 1;
+        grid-row: 2;
+        border: 1px solid #e60707;
+        color: azure;
       }
     </style>
+      
+      <div class="video">
+        <h1>Live Video</h1>
+        <img id="image" />
+      </div>
 
-    <button onclick="blink()" id="myButton">Click me</button>
-    <img id="image" />
+
+    <div class="controller" >
+
+      <button onmousedown="send('f')" onmouseup="send('x')" id="forward">Forward</button>
+      <button onmousedown="send('r')" onmouseup="send('x')" id="right"> Right  </button>
+      <button onmousedown="send('b')" onmouseup="send('x')" id="back">Backward</button>      
+      <button onmousedown="send('l')" onmouseup="send('x')" id="left">Left </button>
+    
+    </div>
+
+
+
   </body>
 </html>

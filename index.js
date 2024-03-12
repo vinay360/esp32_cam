@@ -18,10 +18,11 @@ const clientWss = new WebSocket.Server({ port: WS_PORT, host: HOST }, () =>
 ).on('connection', (ws) => {
   console.log('Client connected');
   ws.on('message', (data) => {
+    console.log(data.toString());
     if (ws.readyState !== ws.OPEN) return;
     if (cam) cam.send(data);
   });
-  connectedClients.push(ws);
+  connectedClients=[ws];
 });
 
 const camWss = new WebSocket.Server({ port: CAM_PORT, host: HOST }, () => {
