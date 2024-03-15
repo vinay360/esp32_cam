@@ -23,8 +23,8 @@
 #define HREF_GPIO_NUM     23
 #define PCLK_GPIO_NUM     22
 
-const char* ssid = "NSUT-Campus";
-const char* password = NULL;
+const char* ssid = "Rock";
+const char* password = "20212819";
 const char* websocket_server_host = "13.233.148.182";
 const uint16_t websocket_server_port = 8000;
 
