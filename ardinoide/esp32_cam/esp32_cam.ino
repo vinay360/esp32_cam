@@ -25,7 +25,7 @@
 
 const char* ssid = "Rock";
 const char* password = "20212819";
-const char* websocket_server_host = " 13.232.94.39";
+const char* websocket_server_host = " 15.206.123.195";
 const uint16_t websocket_server_port = 8000;
 
 using namespace websockets;
