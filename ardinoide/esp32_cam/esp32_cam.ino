@@ -23,9 +23,9 @@
 #define HREF_GPIO_NUM     23
 #define PCLK_GPIO_NUM     22
 
-const char* ssid = "Rock";
-const char* password = "20212819";
-const char* websocket_server_host = "ec2-13-232-255-39.ap-south-1.compute.amazonaws.com";
+const char* ssid = "NSUT_WIFI";
+const char* password = NULL;
+const char* websocket_server_host = "ec2-13-233-168-166.ap-south-1.compute.amazonaws.com";
 const uint16_t websocket_server_port = 8000;
 
 using namespace websockets;
