@@ -25,7 +25,7 @@
 
 const char* ssid = "Rock";
 const char* password = "20212819";
-const char* websocket_server_host = "ec2-13-233-66-198.ap-south-1.compute.amazonaws.com";
+const char* websocket_server_host = "ec2-13-233-184-161.ap-south-1.compute.amazonaws.com";
 const uint16_t websocket_server_port = 8000;
 
 using namespace websockets;
