@@ -24,7 +24,7 @@ ws.onmessage = (message) => {
 function send(msg) {
   console.log(msg);
   if(ws.readyState !== ws.OPEN) {
-    console.log("chutiye connect to kr");
+    console.log("please connect ");
     return;
   }
   ws.send(msg);
